@@ -106,3 +106,8 @@ venv.bak/
 
 # protobuf stuff
 tf/proto/
+
+data/
+cudnn/
+leelalogs/
+.vscode

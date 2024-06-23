@@ -184,7 +184,7 @@ def main(cmd):
 
     import tensorflow as tf
     from chunkparsefunc import parse_function
-    from tfprocess import TFProcess
+    from my_tfprocess import TFProcess
     tfprocess = TFProcess(cfg)
     train_dataset = tf.data.Dataset.from_generator(
         train_parser.parse,
