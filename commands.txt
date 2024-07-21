@@ -1,0 +1,27 @@
+git clone https://github.com/LeelaChessZero/lczero-training.git --recursive
+
+curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+bash Anaconda3-2023.09-0-Linux-x86_64.sh 
+
+wget https://us.download.nvidia.com/tesla/460.106.00/NVIDIA-Linux-x86_64-460.106.00.run
+chmod 777 NVIDIA-Linux-x86_64-460.106.00.run 
+sudo ./NVIDIA-Linux-x86_64-460.106.00.run 
+nvidia-smi
+
+wget https://developer.download.nvidia.com/compute/cuda/11.2.0/local_installers/cuda_11.2.0_460.27.04_linux.run
+sudo apt-get install gcc-10
+sudo rm /usr/bin/gcc
+sudo ln -s /usr/bin/gcc-10 /usr/bin/gcc
+ls -la /usr/bin/gcc
+sudo sh cuda_11.2.0_460.27.04_linux.run
+ls /usr/local/
+
+conda create -n chess python=3.8
+conda activate chess
+pip install tensorflow==2.5.0
+pip install PyYaml
+sudo apt install protobuf-compiler
+conda install cudatoolkit=11.0.221
+conda install cudnn=8.9.2.26
+
+wget https://storage.lczero.org/files/training_data/training-run1--20200711-2017.tar

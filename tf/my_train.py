@@ -24,7 +24,7 @@ import glob
 import gzip
 import random
 import multiprocessing as mp
-from chunkparser import ChunkParser
+from my_chunkparser import ChunkParser
 
 SKIP = 32
 
@@ -165,7 +165,7 @@ def main(cmd):
                                diff_focus_slope=diff_focus_slope,
                                diff_focus_q_weight=diff_focus_q_weight,
                                diff_focus_pol_scale=diff_focus_pol_scale,
-                               workers=train_workers)
+                               workers=20)
     test_shuffle_size = int(shuffle_size * (1.0 - train_ratio))
     # no diff focus for test_parser
     test_parser = ChunkParser(test_chunks,
@@ -173,7 +173,7 @@ def main(cmd):
                               shuffle_size=test_shuffle_size,
                               sample=SKIP,
                               batch_size=split_batch_size,
-                              workers=test_workers)
+                              workers=20)
     if 'input_validation' in cfg['dataset']:
         valid_chunks = get_all_chunks(cfg['dataset']['input_validation'])
         validation_parser = ChunkParser(valid_chunks,
@@ -229,9 +229,9 @@ def main(cmd):
     num_evals = max(1, num_evals // split_batch_size)
     print("Using {} evaluation batches".format(num_evals))
     tfprocess.total_batch_size = total_batch_size
-    # print("DEBUG!!!!")
-    # tf.config.experimental_run_functions_eagerly(True)
-    # print("DEBUG!!!!")
+    print("DEBUG!!!!")
+    tf.config.experimental_run_functions_eagerly(True)
+    print("DEBUG!!!!")
     tfprocess.process_loop(total_batch_size,
                            num_evals,
                            batch_splits=batch_splits)
